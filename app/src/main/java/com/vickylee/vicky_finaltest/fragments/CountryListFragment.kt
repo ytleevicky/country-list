@@ -82,8 +82,11 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list), OnItemClic
                     val countryName = item.name.common
                     val capital = item.capital
                     val population = item.population
+                    val capital_latlng = item.capitalInfo.latlng
+                    val country_latlng = item.latlng
 
-                    val country = Country(countryName, capital, population)
+                    val country = Country(countryName, capital, population, capital_latlng, country_latlng)
+                    Log.e("NEW", "NEW: $country")
                     countryArrayList.add(country)
                     countryAdapter?.notifyDataSetChanged()
                 }

@@ -1,6 +1,7 @@
 package com.vickylee.vicky_finaltest.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
 
     private lateinit var mMap: GoogleMap
     private lateinit var locationToShow: LatLng
+    private lateinit var capitalLocationToShow: LatLng
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +51,11 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        locationToShow = LatLng(43.98884, -79.34)
-
+        if (args.country.latlng != null) {
+            Log.e("LAT:", "${args.country.latlng!![0].toDouble()}")
+            Log.e("LAT:", "${args.country.latlng!![1].toDouble()}")
+            locationToShow = LatLng(args.country.latlng!![0].toDouble(), args.country.latlng!![1].toDouble())
+        }
 
         binding.tvName.setText(args.country.name)
 
@@ -71,10 +76,14 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        //val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(locationToShow).title("You are here"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationToShow, 5.0f))
+        // Add a marker
+        if (args.country.capitalInfo != null) {
+            capitalLocationToShow = LatLng(args.country.capitalInfo!![0].toDouble(), args.country.capitalInfo!![1].toDouble())
+            mMap.addMarker(MarkerOptions().position(capitalLocationToShow).title(args.country.capital!![0].toString()))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(capitalLocationToShow, 5.0f))
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationToShow, 5.0f))
+        }
 
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         mMap.isTrafficEnabled = false
