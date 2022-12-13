@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -71,8 +72,11 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list), OnItemClic
         super.onResume()
 
         countryJSONResponseData.observe(this, Observer { list ->
-            if(list != null) {
-                for(item in list){
+
+            val sortedList = list.sortedWith(compareBy({it.name.common}))
+
+            if(sortedList != null) {
+                for(item in sortedList){
                     val countryName = item.name.common
                     val capital = item.capital
                     val population = item.population
