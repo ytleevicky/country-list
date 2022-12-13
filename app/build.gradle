@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -68,5 +69,10 @@ dependencies {
     // optional library to debug Retrofit’s http requests/responses
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
+    //for accessing the location services using Google Play Services
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    //to use Google Maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
 }
