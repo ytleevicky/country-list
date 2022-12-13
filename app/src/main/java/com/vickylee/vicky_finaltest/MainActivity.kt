@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         // setup back button navigation
         this.navController = navHostFragment.navController
-        //appBarConfiguration = AppBarConfiguration(navController.graph)
         appBarConfiguration = AppBarConfiguration(bottomNavigationView.menu)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

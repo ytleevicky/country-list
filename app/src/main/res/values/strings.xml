@@ -3,4 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="fragment_country_list">Country List</string>
+    <string name="fragment_country_details">Country Details</string>
+    <string name="fragment_favorite_list">Favorites</string>
 </resources>

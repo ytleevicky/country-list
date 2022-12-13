@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.vickylee.vicky_finaltest.databinding.CountryBinding
+import com.vickylee.vicky_finaltest.fragments.FavoritesListFragment
 import com.vickylee.vicky_finaltest.models.Country
 
 class CountryListAdapter(
@@ -17,7 +19,7 @@ class CountryListAdapter(
     // bind the data with the view
     class ItemViewHolder(var binding: CountryBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (currentItem: Country, clickListener: OnItemClickListener) {
+        fun bind(currentItem: Country, clickListener: OnItemClickListener) {
 
             binding.tvName.setText(currentItem.name)
 
@@ -25,7 +27,7 @@ class CountryListAdapter(
                 binding.tvCapital.setText("N/A")
             } else {
                 var text = ""
-                for(item in currentItem.capital) {
+                for (item in currentItem.capital) {
                     text += item
                 }
                 binding.tvCapital.setText("$text")
@@ -41,7 +43,10 @@ class CountryListAdapter(
     }
 
     // creates the appearance of view
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryListAdapter.ItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CountryListAdapter.ItemViewHolder {
         return CountryListAdapter.ItemViewHolder(
             CountryBinding.inflate(
                 LayoutInflater.from(context),
@@ -53,10 +58,10 @@ class CountryListAdapter(
 
     // binds the data with the view
     override fun onBindViewHolder(holder: CountryListAdapter.ItemViewHolder, position: Int) {
-       holder.bind(
-           countryList.get(position),
-           clickListener
-       )
+        holder.bind(
+            countryList.get(position),
+            clickListener
+        )
     }
 
     override fun getItemCount(): Int {

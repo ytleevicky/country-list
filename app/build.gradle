@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'kotlin-kapt'  // for Room
 }
 
 android {
@@ -74,5 +75,9 @@ dependencies {
 
     //to use Google Maps
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // Room components
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
 
 }

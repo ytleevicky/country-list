@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,6 +17,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.vickylee.vicky_finaltest.R
 import com.vickylee.vicky_finaltest.databinding.FragmentCountryDetailsBinding
+import com.vickylee.vicky_finaltest.db.Country
+import com.vickylee.vicky_finaltest.db.CountryRepository
+import kotlinx.coroutines.launch
 
 class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMapReadyCallback {
 
@@ -24,15 +29,20 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
     private val binding get() = _binding!!
     private val args: CountryDetailsFragmentArgs by navArgs()
 
+    // Google Map
     private lateinit var mMap: GoogleMap
     private lateinit var locationToShow: LatLng
     private lateinit var capitalLocationToShow: LatLng
+
+    // Room
+    private lateinit var countryRepository: CountryRepository
+
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        countryRepository = CountryRepository(requireActivity().application)
     }
 
     override fun onCreateView(
@@ -52,9 +62,8 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
         mapFragment.getMapAsync(this)
 
         if (args.country.latlng != null) {
-            Log.e("LAT:", "${args.country.latlng!![0].toDouble()}")
-            Log.e("LAT:", "${args.country.latlng!![1].toDouble()}")
-            locationToShow = LatLng(args.country.latlng!![0].toDouble(), args.country.latlng!![1].toDouble())
+            locationToShow =
+                LatLng(args.country.latlng!![0].toDouble(), args.country.latlng!![1].toDouble())
         }
 
         binding.tvName.setText(args.country.name)
@@ -63,7 +72,7 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
             binding.tvCapital.setText("Capital: N/A")
         } else {
             var text = "Capital: "
-            for(item in args.country.capital!!) {
+            for (item in args.country.capital!!) {
                 text += item
             }
             binding.tvCapital.setText("$text")
@@ -71,6 +80,25 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
 
         binding.tvPopulation.setText("Population: ${args.country.population}")
 
+
+        binding.btnFavorite.setOnClickListener {
+
+            lifecycleScope.launch {
+                val countryName = args.country.name
+                var capital: String = "N/A"
+                val population = args.country.population
+
+                if (args.country.capital != null) {
+                    var capitalList: List<String> = args.country.capital!!
+                    capital = capitalList[0]
+                }
+
+                val favCountry = Country(countryName, capital, population)
+                countryRepository.insertFavCountry(favCountry)
+            }
+
+            Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -78,8 +106,13 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
 
         // Add a marker
         if (args.country.capitalInfo != null) {
-            capitalLocationToShow = LatLng(args.country.capitalInfo!![0].toDouble(), args.country.capitalInfo!![1].toDouble())
-            mMap.addMarker(MarkerOptions().position(capitalLocationToShow).title(args.country.capital!![0].toString()))
+            capitalLocationToShow = LatLng(
+                args.country.capitalInfo!![0].toDouble(),
+                args.country.capitalInfo!![1].toDouble()
+            )
+            mMap.addMarker(
+                MarkerOptions().position(capitalLocationToShow).title(args.country.capital!![0])
+            )
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(capitalLocationToShow, 5.0f))
         } else {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationToShow, 5.0f))
