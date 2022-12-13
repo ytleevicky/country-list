@@ -9,7 +9,11 @@
         android:id="@+id/countryDetailsFragment"
         android:name="com.vickylee.vicky_finaltest.fragments.CountryDetailsFragment"
         android:label="fragment_country_details"
-        tools:layout="@layout/fragment_country_details" />
+        tools:layout="@layout/fragment_country_details" >
+        <argument
+            android:name="country"
+            app:argType="com.vickylee.vicky_finaltest.models.Country" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesListFragment"
         android:name="com.vickylee.vicky_finaltest.fragments.FavoritesListFragment"
@@ -19,5 +23,9 @@
         android:id="@+id/countryListFragment"
         android:name="com.vickylee.vicky_finaltest.fragments.CountryListFragment"
         android:label="fragment_country_list"
-        tools:layout="@layout/fragment_country_list" />
+        tools:layout="@layout/fragment_country_list" >
+        <action
+            android:id="@+id/action_countryListFragment_to_countryDetailsFragment"
+            app:destination="@id/countryDetailsFragment" />
+    </fragment>
 </navigation>

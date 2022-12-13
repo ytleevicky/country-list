@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vickylee.vicky_finaltest.R
 import com.vickylee.vicky_finaltest.adapters.CountryListAdapter
@@ -76,6 +77,7 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list), OnItemClic
             val sortedList = list.sortedWith(compareBy({it.name.common}))
 
             if(sortedList != null) {
+                countryArrayList.clear()
                 for(item in sortedList){
                     val countryName = item.name.common
                     val capital = item.capital
@@ -95,7 +97,8 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list), OnItemClic
     }
 
     override fun onItemClicked(country: Country, position: Int) {
-        Toast.makeText(requireContext(), "Item clicked: ${country.name}", Toast.LENGTH_SHORT).show()
+        val action = CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(country)
+        findNavController().navigate(action)
     }
 
 
