@@ -73,9 +73,11 @@ class FavoritesListFragment : Fragment(R.layout.fragment_favorites_list), OnItem
                         val population = country.population
                         val capitalInfo = listOf<String>()
                         val laglng = listOf<String>()
+                        val flagImg = country.flagImg
+                        val flagEmoji = country.flagEmoji
 
                         val country: Country =
-                            Country(countryName, capital, population, capitalInfo, laglng)
+                            Country(countryName, capital, population, capitalInfo, laglng, flagImg, flagEmoji)
 
                         if (country != null) {
                             favCountryArrayList.add(country as Country)

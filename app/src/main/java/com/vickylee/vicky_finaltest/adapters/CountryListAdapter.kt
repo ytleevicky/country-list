@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.vickylee.vicky_finaltest.databinding.CountryBinding
 import com.vickylee.vicky_finaltest.fragments.FavoritesListFragment
 import com.vickylee.vicky_finaltest.models.Country
@@ -34,6 +35,10 @@ class CountryListAdapter(
             }
 
             binding.tvPopulation.setText("Population: ${currentItem.population}")
+
+            val imageView = binding.ivFlag
+
+            Picasso.get().load(currentItem.flagImg).into(imageView)
 
             itemView.setOnClickListener {
                 clickListener.onItemClicked(currentItem, this.adapterPosition)

@@ -66,7 +66,7 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
                 LatLng(args.country.latlng!![0].toDouble(), args.country.latlng!![1].toDouble())
         }
 
-        binding.tvName.setText(args.country.name)
+        binding.tvName.setText("${args.country.flag} ${args.country.name}")
 
         if (args.country.capital == null || (args.country.capital)!!.isEmpty()) {
             binding.tvCapital.setText("Capital: N/A")
@@ -87,13 +87,15 @@ class CountryDetailsFragment : Fragment(R.layout.fragment_country_details), OnMa
                 val countryName = args.country.name
                 var capital: String = "N/A"
                 val population = args.country.population
+                val flagImg = args.country.flagImg
+                val flagEmoji = args.country.flag
 
                 if (args.country.capital != null) {
                     var capitalList: List<String> = args.country.capital!!
                     capital = capitalList[0]
                 }
 
-                val favCountry = Country(countryName, capital, population)
+                val favCountry = Country(countryName, capital, population, flagImg, flagEmoji)
                 countryRepository.insertFavCountry(favCountry)
             }
 

@@ -2,33 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="10dp"
     android:background="#EFEFEF"
-    android:padding="10dp"
-    android:layout_margin="10dp">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:textSize="30sp"
-        android:textColor="@color/purple_500"
-        android:textStyle="bold"
-        android:text="Country Name" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_capital"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#909090"
-        android:textSize="18sp"
-        android:text="Capital" />
+        <ImageView
+            android:id="@+id/iv_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/tv_population"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Population" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Country Name"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_capital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capital"
+                android:textColor="#909090"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_population"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Population" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

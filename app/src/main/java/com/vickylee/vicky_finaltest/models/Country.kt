@@ -9,15 +9,22 @@ class CapitalInfo(val latlng: List<String>?) {
 
 }
 
+class Flags(val png: String, val svg: String) {
+
+}
+
 class Country(
     val name: String,
     val capital: List<String>?,
     val population: Int,
     val capitalInfo: List<String>?,
-    val latlng: List<String>
+    val latlng: List<String>,
+    val flagImg: String,
+    val flag: String,
 ) : java.io.Serializable {
+
     override fun toString(): String {
-        return "Country(name='$name', capital=$capital, population=$population, capitalInfo=$capitalInfo, latlng=$latlng)"
+        return "Country(name='$name', capital=$capital, population=$population, capitalInfo=$capitalInfo, latlng=$latlng, flagImg='$flagImg')"
     }
 }
 
@@ -26,7 +33,9 @@ class CountryJSONResponse(
     val capital: List<String>?,
     val population: Int,
     val capitalInfo: CapitalInfo,
-    val latlng: List<String>
+    val latlng: List<String>,
+    val flags: Flags,
+    val flag: String,
 ) {
 
 }

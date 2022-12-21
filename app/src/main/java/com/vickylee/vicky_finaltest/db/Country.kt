@@ -8,6 +8,8 @@ class Country(
     val countryName: String,
     val capital: String,
     val population: Int,
+    val flagImg: String,
+    val flagEmoji: String=""
 ) {
 
     @PrimaryKey(autoGenerate = true)

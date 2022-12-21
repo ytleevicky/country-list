@@ -84,8 +84,10 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list), OnItemClic
                     val population = item.population
                     val capital_latlng = item.capitalInfo.latlng
                     val country_latlng = item.latlng
+                    val flag_img = item.flags.png
+                    val flag_emoji = item.flag
 
-                    val country = Country(countryName, capital, population, capital_latlng, country_latlng)
+                    val country = Country(countryName, capital, population, capital_latlng, country_latlng, flag_img, flag_emoji)
                     countryArrayList.add(country)
                     countryAdapter?.notifyDataSetChanged()
                 }
