@@ -12,6 +12,8 @@ import com.vickylee.vicky_finaltest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private val API_KEY = BuildConfig.ApiKey
+
     val TAG = this@MainActivity.toString()
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
