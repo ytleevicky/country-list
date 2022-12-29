@@ -1,4 +1,4 @@
-# World Countries Information
+# World Countries Information 🇨🇦🇺🇸🇫🇷🇦🇺
 
 An Android application that displays information about world countries
 
