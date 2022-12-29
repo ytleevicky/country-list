@@ -11,7 +11,7 @@ Project Features:
 ### 3 screens inside this application 
 | 1. List of World Countries Screen | 2. Country Details Screen | 3. Favourite Country List Screen |
 | ----------- | ---------- | ---------- | 
-| <img src="screenshot/country_list.png" width="300" height="648"> | <img src="screenshot/country_details.png" width="300" height="648"> | <img src="screenshot/country_fav_2.png" width="300" height="648"> |
+| <img src="screenshot/country_list.png" width="200"> | <img src="screenshot/country_details.png" width="200"> | <img src="screenshot/country_fav_2.png" width="200"> |
 
 
 
